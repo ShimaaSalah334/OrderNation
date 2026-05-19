@@ -1,0 +1,35 @@
+<div>
+<form [formGroup]="logInForm" (ngSubmit)="onSubmit()">
+
+  <h3>Login As Admin</h3>
+  <div class="input"><img src="assets/user-outline.png" alt="" class="left_image"><input type="text" formControlName="userName" name="admin_username" required placeholder="username">
+    <div
+    class="warnning-message"
+    role="alert"
+    [hidden]="LoginUserName?.valid || LoginUserName?.untouched"
+  >
+    <small *ngIf="LoginUserName?.errors?.['required']"
+      >Name is required</small
+    >
+  </div>
+  </div>
+
+  <div class="input"><img src="assets/padlock.png" alt="" class="left_image"> <input type="password" formControlName="password" name="admin_password" required placeholder="password"><img src="assets/hide.png" alt="" class="right_image">
+    <div
+    class="warnning-message"
+    role="alert"
+    [hidden]="LoginPassword?.valid || LoginPassword?.untouched"
+  >
+    <small *ngIf="LoginPassword?.errors?.['required']"
+      >Password is required</small
+    >
+  </div>
+  </div>
+<input type="submit" value="Login"  [disabled]="logInForm.invalid"
+>
+</form>
+
+</div>
+<div *ngIf="alertLoginError " class="alert_fail" [@slideInOut]>
+  UserName or Password Invalid
+ </div>

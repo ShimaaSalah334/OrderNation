@@ -1,0 +1,73 @@
+<div [class.addcomment]="alert">
+  <form action="" *ngIf="alert" >
+      <p> {{'إضافة تعليق'| translate}}</p>
+      <input type="text" name="addcomment" placeholder="{{'إضافة تعليق'| translate}}">
+      <div class="comment-buttons">
+      <button type="submit"  class="addComment-button">
+       {{'إضافة' | translate}}
+      </button>
+      <button  class="closeComment-button" (click)="closeDiv()">{{'إلغاء' | translate}}</button>
+      </div>
+  </form>
+  </div>
+<div class="body" [ngClass]="{ blur: alert }">
+<div class="main" id="MainId" >
+  <ng-container *ngIf="loadingService.loading$ | async as isLoading">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+    </ng-container>
+  <div class="main-papers" >
+    <h2> {{'الأوراق الأساسية' | translate}}</h2>
+    <p *ngFor="let paper of paperList">
+     {{paper.paperName}}
+    </p>
+  </div>
+  <div class="some-details">
+    <div>
+    <h2> {{'بعض التفاصيل' | translate}}</h2> <img src="assets/downArrow (1).png" alt="" (click)="openSomeDetails()" id="arrow-someDetails">
+    </div>
+    <p *ngIf="showSomeDetails" [@showHideDiscoverMoreAnimation]>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      Quibusdam, adipisci incidunt numquam non labore consequuntur vero. Eius voluptas quasi dolores voluptatum. Et itaque expedita cupiditate voluptate architecto sit doloremque possimus.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias nisi alias, et dolore suscipit voluptate ab consequuntur error dolor iste repellat qui delectus cum enim atque officiis temporibus saepe.
+    </p>
+  </div>
+  <div class="relatedToCountry">
+
+    <div>
+    <h2> {{'خاص بالدولة' | translate}}</h2><img src="assets/downArrow (1).png" alt="" (click)="openRelatedToCountry()" id="arrow-relatedToCountry">
+    </div>
+    <div *ngIf="showRelatedToCountry" [@showHideDiscoverMoreAnimation]>
+    <div class="notes">
+      <div>
+      <h3> {{'ملاحظات' | translate}} </h3><img src="assets/downArrow (1).png" alt="" (click)="openNotes()" id="arrow-notes">
+      </div>
+      <p *ngIf="showNotes" [@showHideDiscoverMoreAnimation]>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Quibusdam, adipisci incidunt numquam non labore consequuntur vero. Eius voluptas quasi dolores voluptatum. Et itaque expedita cupiditate voluptate architecto sit doloremque possimus.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias nisi alias, et dolore suscipit voluptate ab consequuntur error dolor iste repellat qui delectus cum enim atque officiis temporibus saepe.
+      </p>
+    </div>
+    <div class="embassies">
+      <div>
+      <h3 > {{'السفارات' | translate}}</h3><img src="assets/downArrow (1).png" alt="" (click)="openEmbassies()" id="arrow-embassies">
+      </div>
+      <p *ngIf="showEmbassies" [@showHideDiscoverMoreAnimation]>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Quibusdam, adipisci incidunt numquam non labore consequuntur vero. Eius voluptas quasi dolores voluptatum. Et itaque expedita cupiditate voluptate architecto sit doloremque possimus.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias nisi alias, et dolore suscipit voluptate ab consequuntur error dolor iste repellat qui delectus cum enim atque officiis temporibus saepe.
+      </p>
+    </div>
+  </div>
+</div>
+<div>
+<a  class="float">
+ <img src="assets/plus.png" alt="" class="my-float" (click)="showSign()">
+  </a>
+</div>
+
+</div>
+</div>
+
+
+

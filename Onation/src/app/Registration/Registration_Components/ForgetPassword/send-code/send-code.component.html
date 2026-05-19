@@ -1,0 +1,61 @@
+<div class="background-div"></div>
+<div class="body">
+  <div class="container">
+    <div class="right-container">
+      <img src="assets/logo.png" alt="" />
+      <p>O_NATION</p>
+    </div>
+    <div class="left-container">
+      <div class="send-code" id="code">
+        <img
+          src="assets/previous.png"
+          alt="previous icon"
+          (click)="showemail()"
+          class="previous-icon"
+        />
+        <img src="assets/lock.png" alt="lock icon" class="lock-icon" />
+        <form  #sendCodeform="ngForm" (ngSubmit)="onSubmit(sendCodeform)" id="codeform">
+          <div class="enter-code">
+            <label for="code-input">ادخل الرمز</label>
+            <input
+            #sendCodeInp="ngModel"
+              type="text"
+              id="code-input"
+              name="code"
+              autocomplete="off"
+              ngModel code="true"
+              required
+              [(ngModel)]="code"
+            />
+            <img src="assets/check.png" alt="check icon" class="code-icon" />
+          </div>
+          <div class="warnning-message" role="alert" [hidden]="sendCodeInp.valid ||sendCodeInp.untouched" >
+            <small *ngIf="sendCodeInp.errors?.['required']">عذرا،الرجاء إدخال الرمز الذي تم إرساله</small>
+          </div>
+          <button type="submit" class="code-btn1" name="send-code" [disabled]="sendCodeform.invalid">
+            ارسل الرمز
+          </button>
+          <button
+            type="button"
+            class="code-btn2"
+            name="send-code"
+            (click)="resendCode()"
+          >
+            إعادة ارسال الرمز
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="alert" class="alert_fail" [@slideInOutCode]>
+ عذرا هذا الرمز غير صالح.
+</div>
+<div *ngIf="alertResendCode;else AlertResendCodeError" class="alert_success" [@slideInOut]>
+  تم إعادة إرسال الرمز بنجاح.
+</div>
+<ng-template #AlertResendCodeError>
+  <div *ngIf="alertResendCodeError" class="alert_fail" [@slideInOut] >
+    تعذر إعادة إرسال الرمز.
+  </div>
+</ng-template>

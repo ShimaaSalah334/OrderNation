@@ -1,0 +1,22 @@
+.alert_success {
+  padding: 10px;
+  text-align: center;
+  background-color: rgba(15, 120, 180, 0.5);
+  color: white;
+  border-radius: 4px;
+ position: absolute;
+ bottom: 8%;
+ left: 0;
+ right: 0;
+}
+.alert_fail {
+  padding: 10px;
+  text-align: center;
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+ position: absolute;
+ bottom: 7%;
+ left: 0;
+ right: 0;
+}

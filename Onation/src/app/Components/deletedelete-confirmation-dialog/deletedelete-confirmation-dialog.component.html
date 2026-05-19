@@ -1,0 +1,8 @@
+<div class="alert">
+  <img src="assets/alert.png" alt="">
+<h1 mat-dialog-title> !هل تريد حذف الحساب بالفعل؟</h1>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="nobutton">لا</button>
+  <button mat-button [mat-dialog-close]="true" class="yesbutton">نعم</button>
+</div>
+</div>

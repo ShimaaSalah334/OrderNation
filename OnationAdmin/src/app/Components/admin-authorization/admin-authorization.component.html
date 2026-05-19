@@ -1,0 +1,941 @@
+<div class="country">
+  <div class="country-caption">
+  <h1>Country</h1> <img src="assets/arrow-down.png" alt="" (click)="openCountry()" id="arrow-country"> <img src="assets/country.png" alt="" class="icon">
+
+</div>
+<div *ngIf="showCountry" [@showHideSettingsAnimation]>
+  <div class="add_country" >
+    <div class="addcountry-caption">
+<h2>Add Country</h2><img src="assets/arrow-down.png" alt="" (click)="openAddCountry()" id="arrow-addcountry">
+    </div>
+<form #addCountryForm="ngForm" (ngSubmit)="addCountry(addCountryForm)" *ngIf="showAddCountry" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="name">
+  <label for="name">Name</label>
+  <input #nameInp="ngModel" [(ngModel)]="countryAdd.countryName" type="text" id="name" name="name" required>
+  </div>
+  <div class="continent">
+    <label for="continent">Continent</label>
+    <input  #continentInp="ngModel" [(ngModel)]="countryAdd.countryContinent" type="text" id="continent" name="continent" >
+    </div>
+</div>
+<div class="second_row">
+<div class="note">
+  <label for="note">Note</label>
+    <input #noteInp="ngModel" [(ngModel)]="countryAdd.countryNotes" type="text" id="note" name="note">
+
+</div>
+  <div class="description">
+    <label for="description">Description</label>
+    <input #descriptionInp="ngModel" [(ngModel)]="countryAdd.countryDescription" type="text" id="description" name="description">
+    </div>
+</div>
+<div class="third_row">
+<div class="addcountry_img">
+<label for="addcountry_img">City Image Url</label>
+<input #addCountryImgInp\ type="url" id="addcountry_img" name="addcountry_img" (change)="onImageUrlChange($event)">
+</div>
+<div class="favorite">
+   <input  #favInp="ngModel" [(ngModel)]="countryAdd.favoriteCountry" type="checkbox" id="favorite" name="favorite">
+  <label for="favorite">Favorite</label>
+  </div>
+</div>
+<div class="country_button">
+  <input type="submit" value="Add" class="buttons">
+</div>
+</form>
+  </div>
+  <div class="delete_country" >
+    <div class="deletecountry-caption">
+<h2>Delete Country</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletecountry" (click)="openDeleteCountry()">
+    </div>
+<form #deleteCountryForm="ngForm" (ngSubmit)="deleteCountry(deleteCountryForm)" *ngIf="showDeleteCountry" [@showHideSettingsAnimation]>
+
+<div class="delete_name">
+  <label for="delete_name">Name</label>
+  <select #deletecountrySelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedDeleteCountry" (ngModelChange)="selectCountryDelete($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>
+  <input type="submit" value="Delete" class="delete_buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_country" >
+    <div class="editcountry-caption">
+<h2>Edit Country</h2><img src="assets/arrow-down.png" alt="" (click)="openEditCountry()" id="arrow-editcountry">
+    </div>
+<form #editCountryForm="ngForm" (ngSubmit)="editCountry(editCountryForm)" *ngIf="showEditCountry" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="name">
+  <label for="editcountry_name">Name</label>
+  <select #editcountrySelect="ngModel" id="editcountry_name" name="editcountry_name" [(ngModel)]="selectedEditCountry" (ngModelChange)="selectCountryEdit($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>  </div>
+  <div class="continent">
+    <label for="edit_continent">Continent</label>
+    <input #editContinentInp="ngModel" [(ngModel)]="countryEdit.countryContinent" type="text" id="edit_continent" name="edit_continent">
+    </div>
+</div>
+<div class="second_row">
+  <div class="note">
+    <label for="edit_note">Note</label>
+      <input #editNoteInp="ngModel" [(ngModel)]="countryEdit.countryNotes" type="text" id="edit_note" name="edit_note">
+      </div>
+
+  <div class="description">
+    <label for="edit_description">Description</label>
+    <input #editDescriptionInp="ngModel" [(ngModel)]="countryEdit.countryDescription" type="text" id="edit_description" name="edit_description">
+    </div>
+</div>
+<div class="edit_favorite">
+  <input #editFavoriteInp="ngModel" [(ngModel)]="countryEdit.favoriteCountry" type="checkbox" id="edit_favorite" name="edit_favorite">
+  <label for="edit_favorite">Favorite</label>
+
+  <input type="submit" value="Edit" class="buttons">
+</div>
+
+</form>
+  </div>
+</div>
+</div>
+<div class="city">
+  <div class="city-caption">
+  <h1>City</h1> <img src="assets/arrow-down.png" alt="" id="arrow-city" (click)="openCity()"><img src="assets/city.png" alt="" class="icon">
+</div>
+<div *ngIf="showCity" [@showHideSettingsAnimation]>
+  <div class="add_city" >
+    <div class="addcity-caption">
+<h2>Add City</h2><img src="assets/arrow-down.png" alt="" (click)="openAddCity()" id="arrow-addcity">
+    </div>
+<form #addCityForm="ngForm" *ngIf="showAddCity" [@showHideSettingsAnimation] (ngSubmit)="addCity(addCityForm)" >
+<div class="first_row">
+  <div class="country_name">
+  <label for="country_name">Country Name</label>
+  <select #countrySelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedCountryAddCity" (ngModelChange)="selectCountryCityAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>  </div>
+  <div class="city_name">
+    <label for="city_name">City Name</label>
+    <input #cityNameInp="ngModel" type="text" id="city_name" name="city_name" [(ngModel)]="cityAdd.countryCity1">
+    </div>
+</div>
+  <div class="city_img">
+  <label for="city_img">City Image Url</label>
+  <input #cityImgInp="ngModel" type="url" id="city_img" name="city_img" [(ngModel)]="cityAdd.cityImage">
+  <input type="submit" value="Add" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="delete_city" >
+    <div class="deletecity-caption">
+<h2>Delete City</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletecity" (click)="openDeleteCity()">
+    </div>
+<form #deleteCityForm="ngForm" (ngSubmit)="deleteCity(deleteCityForm)" *ngIf="showDeleteCity" [@showHideSettingsAnimation]>
+
+<div class="delete_name">
+  <label for="deletecity_name">Name</label>
+  <select #countrySelect="ngModel" id="deletecity_name" name="deletecity_name" [(ngModel)]="selectedDeleteCity" (ngModelChange)="selectCityDelete($event)">
+    <option *ngFor="let city of cities" [ngValue]="city">{{city.countryCity1}}</option>
+  </select><input type="submit" value="Delete" class="delete_buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_city" >
+    <div class="editcity-caption">
+<h2>Edit City</h2><img src="assets/arrow-down.png" alt="" (click)="openEditCity()" id="arrow-editcity">
+    </div>
+<form #editCityForm="ngForm" (ngSubmit)="editCity(editCityForm)"  *ngIf="showEditCity" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="country_name">
+    <label for="countryCityEdit_name">Country Name</label>
+    <select #editcountrySelect="ngModel" id="countryCityEdit_name" name="countryCityEdit_name" [(ngModel)]="selectedCountryEditCity" (ngModelChange)="selectCountryCityEdit($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>     </div>
+    <div class="city_name">
+      <label for="cityedit_name">City Name</label>
+      <select #countrySelect="ngModel" id="deletecity_name" name="deletecity_name" [(ngModel)]="selectedEditCity" (ngModelChange)="selectCityEdit($event)">
+        <option *ngFor="let city of filteredCities" [ngValue]="city">{{city.countryCity1}}</option>
+      </select>      </div>
+  </div>
+    <div class="city_img">
+    <label for="cityedit_img">City Image Url</label>
+    <input #editImgInp="ngModel" [(ngModel)]="cityEdit.cityImage" type="text" id="cityedit_img" name="cityedit_img">
+    <input  type="submit" value="Edit" class="buttons">
+
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="touristicPlace">
+  <div class="touristicPlace-caption">
+  <h1>Touristic Place</h1> <img src="assets/arrow-down.png" alt="" id="arrow-touristicplace" (click)="openTouristicPlace()"><img src="assets/location.png" alt="" class="icon">
+</div>
+<div *ngIf="showTouristicPlace" [@showHideSettingsAnimation]>
+  <div class="add_touristicPlace" >
+    <div class="addtouristicPlace-caption">
+<h2>Add Touristic Place</h2><img src="assets/arrow-down.png" alt="" (click)="openAddTouristicPlace()" id="arrow-addtouristicplace">
+    </div>
+<form  #addTouristicPlaceForm="ngForm"  (ngSubmit)="addTouristicplace(addTouristicPlaceForm)" *ngIf="showAddTouristicPlace">
+<div class="first_row">
+  <div class="country_name">
+  <label for="countryTouristicPlace_name">Country Name</label>
+  <select #countrySelect="ngModel" id="countryTouristicPlace_name" name="countryTouristicPlace_name" [(ngModel)]="selectedCountryAddTouristicPlace" (ngModelChange)="selectCountryTouristicPlaceAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>  </div>
+  <div class="touristicPlace_name">
+    <label for="touristicPlace_name">Place Name</label>
+    <input #touristicPlaceNameInp="ngModel" type="text" id="touristicPlace_name" name="touristicPlace_name" [(ngModel)]="touristicPlaceAdd.placeName">
+    </div>
+</div>
+  <div class="touristicPlace_img">
+  <label for="touristicPlace_img">Place Image Url</label>
+  <input #touristicPlaceImgInp="ngModel" type="url" id="touristicPlace_img" name="touristicPlace_img" [(ngModel)]="touristicPlaceAdd.placeImage">
+  <input type="submit" value="Add" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="delete_touristicPlace" >
+    <div class="deletetouristicPlace-caption">
+<h2>Delete Touristic Place</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletetouristicplace" (click)="openDeleteTouristicPlace()">
+    </div>
+<form #deleteTouristicPlaceForm="ngForm" (ngSubmit)="deleteTouristicPlace(deleteTouristicPlaceForm)" *ngIf="showDeleteTouristicPlace" [@showHideSettingsAnimation]>
+
+<div class="delete_name">
+  <label for="deletetouristicPlace_name">Name</label>
+  <select #deleteTouristicPlaceSelect="ngModel" id="deletetouristicPlace_name" name="deletetouristicPlace_name" [(ngModel)]="selectedDeleteTouristicPlace" (ngModelChange)="selectTouristicPlaceDelete($event)">
+    <option *ngFor="let touristicPlace of touristicPlaces" [ngValue]="touristicPlace">{{touristicPlace.placeName}}</option>
+  </select>
+  <input type="submit" value="Delete" class="delete_buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_touristicPlace" >
+    <div class="edittouristicPlace-caption">
+<h2>Edit Touristic Place</h2><img src="assets/arrow-down.png" alt="" (click)="openEditTouristicPlace()" id="arrow-edittouristicplace">
+    </div>
+    <form #editTouristicPlaceForm="ngForm" (ngSubmit)="editTouristicPlace(editTouristicPlaceForm)" *ngIf="showEditTouristicPlace" [@showHideSettingsAnimation]>
+      <div class="first_row">
+        <div class="editCountryTouristicPlace_name">
+        <label for="editCountryTouristicPlace_name">Country Name</label>
+        <select #editCountryTouristicPlaceSelect="ngModel" id="editCountryTouristicPlace_name" name="editCountryTouristicPlace_name" [(ngModel)]="selectedCountryEditTouristicPlace" (ngModelChange)="selectCountryTouristicPlaceEdit($event)">
+          <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+        </select>  </div>
+        <div class="touristicPlace_name">
+          <label for="editTouristicPlace_name">Place Name</label>
+          <select #editTouristicPlaceSelect="ngModel" id="editTouristicPlace_name" name="editTouristicPlace_name" [(ngModel)]="selectedEditTouristicPlace" (ngModelChange)="selectTouristicPlaceEdit($event)">
+            <option *ngFor="let touristicPlace of filteredTouristicPlaces" [ngValue]="touristicPlace">{{touristicPlace.placeName}}</option>
+          </select>          </div>
+      </div>
+        <div class="touristicPlace_img">
+        <label for="editTouristicPlace_img">Place Image Url</label>
+        <input #editTouristicPlaceImgInp="ngModel" [(ngModel)]="touristicPlaceEdit.placeImage" type="url" id="editTouristicPlace_img" name="editTouristicPlace_img" >
+        <input type="submit" value="Edit" class="buttons">
+
+      </div>
+      </form>
+  </div>
+</div>
+</div>
+
+<div class="countryGroup">
+  <div class="countryGroup-caption">
+  <h1>Country Group</h1> <img src="assets/arrow-down.png" alt="" id="arrow-countrygroup" (click)="openCountryGroup()"><img src="assets/countrygroup.png" alt="" class="icon">
+</div>
+<div *ngIf="showCountryGroup" [@showHideSettingsAnimation]>
+  <div class="add_countryGroup" >
+    <div class="addcountryGroup-caption">
+<h2>Add Country Group</h2><img src="assets/arrow-down.png" alt="" (click)="openAddCountryGroup()" id="arrow-addcountrygroup">
+    </div>
+<form #countryGroupForm="ngForm" (ngSubmit)="addCountryGroup(countryGroupForm)" *ngIf="showAddCountryGroup" [@showHideSettingsAnimation] >
+<div class="first_row">
+  <div class="country_name">
+  <label for="countrygroup_name">Country Name</label>
+  <select #countryGroupSelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedCountryAddCountryGroup" (ngModelChange)="selectCountryCountryGroupAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>  </div>
+  <div class="group">
+    <label for="group">Group</label>
+    <input #groupInp="ngModel" [(ngModel)]="countryGroupAdd.countryGroup1" type="text" id="group" name="group">
+    </div>
+</div>
+  <div class="countryGroup_button">
+  <input type="submit" value="Add" class="buttons">
+</div>
+</form>
+  </div>
+  <div class="delete_countryGroup" >
+    <div class="deletecountryGroup-caption">
+<h2>Delete Country Group</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletecountrygroup" (click)="openDeleteCountryGroup()">
+    </div>
+<form #deleteCountryGroupForm="ngForm" (ngSubmit)="deleteCountryGroup(deleteCountryGroupForm)" *ngIf="showDeleteCountryGroup" [@showHideSettingsAnimation]>
+
+  <div class="first_row">
+    <div class="country_name">
+    <label for="countrydelete_name">Country Name</label>
+    <select #countrySelect="ngModel" id="countrydelete_name" name="countrydelete_name" [(ngModel)]="selectedCountryDeleteCountryGroup" (ngModelChange)="selectCountryCountryGroupDelete($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>    </div>
+    <div class="group">
+      <label for="countrygroupdelete_name">Group</label>
+      <select #countrySelect="ngModel" id="countrygroupdelete_name" name="countrygroupdelete_name" [(ngModel)]="selectedDeleteCountryGroup" (ngModelChange)="selectCountryGroupDelete($event)">
+        <option *ngFor="let countryGroup of filteredDeleteCountryGroups" [ngValue]="countryGroup">{{countryGroup.countryGroup1}}</option>
+      </select>
+     </div>
+  </div>
+    <div class="countryGroup_button">
+    <input type="submit" value="Delete" class="buttons">
+  </div>
+</form>
+  </div>
+  <div class="edit_countryGroup" >
+    <div class="editcountryGroup-caption">
+<h2>Edit Country Group</h2><img src="assets/arrow-down.png" alt="" (click)="openEditCountryGroup()" id="arrow-editcountrygroup">
+    </div>
+<form #editCountrGroupForm="ngForm" (ngSubmit)="editCountryGroup(editCountrGroupForm)"*ngIf="showEditCountryGroup" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="country_name">
+    <label for="countrygroupedit_name">Country Name</label>
+    <select #editCountryCountruGroupSelect="ngModel" id="countrygroupedit_name" name="countrygroupedit_name" [(ngModel)]="selectedCountryEditCountryGroup" (ngModelChange)="selectCountryCountryGroupEdit($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>    </div>
+    <div class="group">
+      <label for="editselect_group">Select Group Name</label>
+      <select #editCountryGroupSelect="ngModel" id="editselect_group" name="editselect_group" [(ngModel)]="selectedEditCountryGroup" (ngModelChange)="selectCountryGroupEdit($event)">
+        <option *ngFor="let countryGroup of filteredEditCountryGroups" [ngValue]="countryGroup">{{countryGroup.countryGroup1}}</option>
+      </select>
+
+      </div>
+  </div>
+    <div class="countryGroup_button">
+      <label for="edit_group">Edit Group Name</label>
+      <input #editGroupInp="ngModel" [(ngModel)]="countryGroupEdit.countryGroup1" id="edit_group" name="edit_group">
+    <input type="submit" value="Edit" class="buttons">
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="purpose">
+  <div class="purpose-caption">
+  <h1>Purpose</h1> <img src="assets/arrow-down.png" alt="" id="arrow-purpose" (click)="openPurpose()"><img src="assets/purpose.png" alt="" class="icon">
+</div>
+<div *ngIf="showPurpose" [@showHideSettingsAnimation]>
+  <div class="add_purpose" >
+    <div class="addpurpose-caption">
+<h2>Add Purpose</h2><img src="assets/arrow-down.png" alt="" (click)="openAddPurpose()" id="arrow-addpurpose">
+    </div>
+<form #addPurposeForm="ngForm" (ngSubmit)="addPurpose(addPurposeForm)" *ngIf="showAddPurpose" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="country_purpose">
+    <label for="country_purpose">Country</label>
+    <select #purposeCountrySelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedCountryAddPurpose" (ngModelChange)="selectCountryPurposeAdd($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>  </div>
+  <div class="purpose_name">
+  <label for="purpose_name">Name</label>
+  <input #purposeNameInp="ngModel" [(ngModel)]="purposeAdd.purposeName" type="text" id="purpose_name" name="purpose_name">
+  </div>
+
+</div>
+<div class="second_row">
+  <div class="addpurpose_img">
+    <label for="addImg">Purpose Image Url</label>
+    <input #addPurposeImgInp="ngModel" [(ngModel)]="purposeAdd.purposeImage" type="text" id="addImg" name="addImg">
+    </div>
+    <div class="type">
+      <label for="type">Type</label>
+      <input #purposeTypeInp="ngModel" [(ngModel)]="purposeAdd.purposeType" type="text" id="type" name="type">
+      </div>
+  </div>
+  <div class="purpose_button">
+  <input type="submit" value="Add" class="buttons">
+</div>
+</form>
+  </div>
+  <div class="delete_purpose" >
+    <div class="deletepurpose-caption">
+<h2>Delete Purpose</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletepurpose" (click)="openDeletePurpose()">
+    </div>
+<form #deletePurposeForm="ngForm" (ngSubmit)="deletePurpose(deletePurposeForm)" *ngIf="showDeletePurpose" [@showHideSettingsAnimation]>
+
+
+    <div class="delete_name">
+    <label for="purposedelete_name">Name</label>
+    <select #paperPurposeSelect="ngModel" id="purposedelete_name" name="purposedelete_name" [(ngModel)]="selectedDeletePurpose" (ngModelChange)="selectPurposeDelete($event)">
+      <option *ngFor="let purpose of purposes" [ngValue]="purpose">{{purpose.purposeName}}</option>
+    </select>
+      <input type="submit" value="Delete" class="delete_buttons">
+
+    </div>
+
+</form>
+  </div>
+  <div class="edit_purpose" >
+    <div class="editpurpose-caption">
+<h2>Edit Purpose</h2><img src="assets/arrow-down.png" alt="" (click)="openEditPurpose()" id="arrow-editpurpose">
+    </div>
+<form #editPurposeForm="ngForm"  (ngSubmit)="editPurpose(editPurposeForm)" *ngIf="showEditPurpose" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="country_purpose">
+      <label for="editcountry_purpose">Country</label>
+      <select #editPurposeCountrySelect="ngModel" id="editcountry_purpose" name="editcountry_purpose" [(ngModel)]="selectedCountryEditPurpose" (ngModelChange)="selectCountryPurposeEdit($event)">
+        <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+      </select>
+      </div>
+    <div class="purpose_name">
+    <label for="purposeedit_name">Name</label>
+    <select #editPurposeNameInp="ngModel" id="purposeedit_name" name="purposeedit_name" [(ngModel)]="selectedEditPurpose" (ngModelChange)="selectPurposeEdit($event)">
+      <option *ngFor="let purpose of filteredEditPurposes" [ngValue]="purpose">{{purpose.purposeName}}</option>
+    </select>
+   </div>
+
+  </div>
+    <div class="purpose_button">
+      <div class="type">
+        <label for="edit_type">Type</label>
+        <input #editTypeInp="ngModel" [(ngModel)]="purposeEdit.purposeType" type="text" id="edit_type" name="edit_type">
+        </div>
+    <input type="submit" value="Edit" class="buttons">
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="embassy">
+  <div class="embassy-caption">
+  <h1>Embassy</h1> <img src="assets/arrow-down.png" alt="" (click)="openEmbassy()" id="arrow-embassy"><img src="assets/embassy.png" alt="" class="icon">
+</div>
+<div *ngIf="showEmbassy" [@showHideSettingsAnimation]>
+  <div class="add_embassy" >
+    <div class="addembassy-caption">
+<h2>Add Embassy</h2><img src="assets/arrow-down.png" alt="" (click)="openAddEmbassy()" id="arrow-addembassy">
+    </div>
+<form #addEmbassyForm="ngForm" (ngSubmit)="addEmbassy(addEmbassyForm)" *ngIf="showAddEmbassy" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="country_embassy">
+  <label for="country_embassy">Country</label>
+  <select #embassyCountrySelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedCountryAddEmbassy" (ngModelChange)="selectCountryEmbassyAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>  </div>
+  <div class="embassy_name">
+    <label for="embassy_name">Name</label>
+    <input #EmbassyNameInp="ngModel" [(ngModel)]="embassyAdd.embassiesName" type="text" id="embassy_name" name="embassy_name">
+    </div>
+</div>
+<div class="second_row">
+  <div class="id">
+  <label for="id">ID</label>
+  <input #EmbassyIdInp="ngModel" [(ngModel)]="embassyAdd.embassiesId" type="number" id="id" name="id">
+  </div>
+  <div class="fax">
+    <label for="fax">Fax</label>
+    <input #EmbassyFaxInp="ngModel" [(ngModel)]="embassyAdd.embassiesFax" type="text" id="fax" name="fax">
+    </div>
+</div>
+<div class="third_row">
+  <div class="email">
+  <label for="email">E-mail</label>
+  <input #EmbassyEmailInp="ngModel" [(ngModel)]="embassyAdd.embassiesMail" type="email" id="email" name="email">
+  </div>
+  <div class="phone">
+    <label for="phone">Phone Number</label>
+    <input #EmbassyPhoneInp="ngModel" [(ngModel)]="embassyAdd.embassiesPhone" type="text" id="phone" name="phone">
+    </div>
+</div>
+<div class="location">
+  <label for="location">Location</label>
+    <input  #EmbassyLocationInp="ngModel" [(ngModel)]="embassyAdd.embassiesLocation" type="text" id="location" name="location">
+<input  type="submit" value="Add" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="delete_embassy" >
+    <div class="deleteembassy-caption">
+<h2>Delete Embassy</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deleteembassy" (click)="openDeleteEmbassy()">
+    </div>
+<form #deleteEmbassyForm="ngForm" (ngSubmit)="deleteEmbassy(deleteEmbassyForm)" *ngIf="showDeleteEmbassy" [@showHideSettingsAnimation]>
+
+<div class="delete_name">
+  <label for="deleteembassy_name">Name</label>
+  <select #deleteEmbassySelect="ngModel" id="deleteembassy_name" name="deleteembassy_name" [(ngModel)]="selectedDeleteEmbassy" (ngModelChange)="selectEmbassyDelete($event)">
+    <option *ngFor="let embassy of embassies" [ngValue]="embassy">{{embassy.embassiesName}}</option>
+  </select>
+  <input type="submit" value="Delete" class="delete_buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_embassy" >
+    <div class="editembassy-caption">
+<h2>Edit Embassy</h2><img src="assets/arrow-down.png" alt="" (click)="openEditEmbassy()" id="arrow-editembassy">
+    </div>
+<form #editEmbassyForm="ngForm" (ngSubmit)="editEmbassy(editEmbassyForm)" *ngIf="showEditEmbassy" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="country_embassy">
+    <label for="countryedit_embassy">Country</label>
+    <select #editEmbassyCountrySelect="ngModel" id="countryedit_embassy" name="countryedit_embassy" [(ngModel)]="selectedCountryEditEmbassy" (ngModelChange)="selectCountryEmbassyEdit($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>    </div>
+    <div class="embassy_name">
+      <label for="embassyedit_name">Name</label>
+      <select #editEmbassySelect="ngModel" id="embassyedit_name" name="embassyedit_name" [(ngModel)]="selectedEditEmbassy" (ngModelChange)="selectEmbassyEdit($event)">
+        <option *ngFor="let embassy of filteredEmbassies" [ngValue]="embassy">{{embassy.embassiesName}}</option>
+      </select>
+      </div>
+  </div>
+  <div class="second_row">
+    <div class="id">
+    <label for="id_edit">ID</label>
+    <input #editEmbassyIdInp="ngModel" [(ngModel)]="embassyEdit.embassiesId" type="number" id="id_edit" name="id_edit">
+    </div>
+    <div class="fax">
+      <label for="fax_edit">Fax</label>
+      <input #editEmbassyFaxInp="ngModel" [(ngModel)]="embassyEdit.embassiesFax" type="text" id="fax_edit" name="fax_edit">
+      </div>
+  </div>
+  <div class="third_row">
+    <div class="email">
+    <label for="email_edit">E-mail</label>
+    <input #editEmbassyEmailInp="ngModel" [(ngModel)]="embassyEdit.embassiesMail" type="email" id="email_edit" name="email_edit">
+    </div>
+    <div class="phone">
+      <label for="phone_edit">Phone Number</label>
+      <input #editEmbassyPhoneInp="ngModel" [(ngModel)]="embassyEdit.embassiesPhone" type="text" id="phone_edit" name="phone_edit">
+      </div>
+  </div>
+  <div class="location">
+    <label for="location_edit">Location</label>
+      <input #editEmbassyLocationInp="ngModel" [(ngModel)]="embassyEdit.embassiesLocation"  type="text" id="location_edit" name="location_edit">
+  <input type="submit" value="Edit" class="buttons">
+
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="paper">
+  <div class="paper-caption">
+  <h1>Paper</h1> <img src="assets/arrow-down.png" alt="" (click)="openPaper()" id="arrow-paper"><img src="assets/paper.png" alt="" class="icon">
+</div>
+<div *ngIf="showPaper" [@showHideSettingsAnimation]>
+  <div class="add_paper" >
+    <div class="addpaper-caption">
+<h2>Add Paper</h2><img src="assets/arrow-down.png" alt="" (click)="openAddPaper()" id="arrow-addpaper">
+    </div>
+<form #addPaperFrorm="ngForm" (ngSubmit)="addPaper(addPaperFrorm)" *ngIf="showAddPaper" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="paper_country">
+  <label for="paper_country">Country</label>
+  <select #paperCountrySelect="ngModel" id="country_name" name="country_name" [(ngModel)]="selectedCountryAddPaper" (ngModelChange)="selectCountryPaperAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>
+ </div>
+ <div class="paper_purpose">
+  <label for="paper_purpose">Purpose</label>
+  <select #paperPurposeSelect="ngModel" id="paper_purpose" name="paper_purpose" [(ngModel)]="selectedPurposeAddPaper" (ngModelChange)="selectPurposePaperAdd($event)">
+    <option *ngFor="let purpose of filteredPurposesAddPaper" [ngValue]="purpose">{{purpose.purposeName}}</option>
+  </select>
+  </div>
+
+</div>
+<div class="second_row">
+  <div class="paper_name">
+    <label for="paper_name">Name</label>
+    <input #paperNameInp="ngModel" [(ngModel)]="paperAdd.paperName" type="text" id="paper_name" name="paper_name">
+    </div>
+  <div class="place">
+    <label for="place">Place</label>
+    <input #paperPlaceInp="ngModel" [(ngModel)]="paperAdd.paperPlace" type="text" id="place" name="place">
+    </div>
+</div>
+<div class="details">
+  <label for="details">Details</label>
+    <input type="text" id="details" name="details">
+<input type="submit" value="Add" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="delete_paper" >
+    <div class="deletepaper-caption">
+<h2>Delete Paper</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletepaper" (click)="openDeletePaper()">
+    </div>
+<form #deletePaperForm="ngForm" (ngSubmit)="deletePaper(deletePaperForm)" *ngIf="showDeletePaper" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="paper_country">
+    <label for="paperdelete_country">Country</label>
+    <select #deletePaperCountrySelect="ngModel" id="paperdelete_country" name="paperdelete_country" [(ngModel)]="selectedCountryDeletePaper" (ngModelChange)="selectCountryPaperDelete($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>     </div>
+    <div class="deletePaperPurpose_name">
+      <label for="paperdelete_purpose">Purpose</label>
+  <select #deletePaperPurposeSelect="ngModel" id="paperdelete_purpose" name="paperdelete_purpose" [(ngModel)]="selectedPurposeDeletePaper" (ngModelChange)="selectPurposePaperDelete($event)">
+    <option *ngFor="let purpose of filteredPurposesDeletePaper" [ngValue]="purpose">{{purpose.purposeName}}</option>
+  </select>
+
+          </div>
+  </div>
+<div class="paperdelete_purpose">
+  <label for="paperdelete_name">Name</label>
+  <select #deletePaperSelect="ngModel" id="paperdelete_name" name="paperdelete_name" [(ngModel)]="selectedDeletePaper" (ngModelChange)="selectPaperDelete($event)">
+    <option *ngFor="let paper of papers" [ngValue]="paper">{{paper.paperName}}</option>
+  </select>
+  <input type="submit" value="Delete" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_paper" >
+    <div class="editpaper-caption">
+<h2>Edit Paper</h2><img src="assets/arrow-down.png" alt="" (click)="openEditPaper()" id="arrow-editpaper">
+    </div>
+<form #editPaperForm="ngForm" (ngSubmit)="editPaper(editPaperForm)"  *ngIf="showEditPaper" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="paper_country">
+    <label for="paperedit_country">Country</label>
+    <select #editPaperCountrySelect="ngModel" id="paperedit_country" name="paperedit_country" [(ngModel)]="selectedCountryEditPaper" (ngModelChange)="selectCountryPaperEdit($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>
+   </div>
+   <div class="paper_purpose">
+    <label for="paperedit_purpose">Purpose</label>
+    <select #editPaperPurposeSelect="ngModel" id="paperedit_purpose" name="paperedit_purpose" [(ngModel)]="selectedPurposeEditPaper" (ngModelChange)="selectPurposePaperEdit($event)">
+      <option *ngFor="let purpose of filteredPurposesEditPaper" [ngValue]="purpose">{{purpose.purposeName}}</option>
+    </select>
+   </div>
+
+  </div>
+  <div class="second_row">
+    <div class="paper_name">
+      <label for="paperedit_name">Name</label>
+      <select #editPaperSelect="ngModel" id="paperedit_name" name="paperedit_name" [(ngModel)]="selectedEditPaper" (ngModelChange)="selectPaperEdit($event)">
+        <option *ngFor="let paper of papers" [ngValue]="paper">{{paper.paperName}}</option>
+      </select>
+      </div>
+    <div class="place">
+      <label for="place_edit">Place</label>
+      <input #editPlaceInp="ngModel" [(ngModel)]="paperEdit.paperPlace" type="text" id="place_edit" name="place_edit">
+      </div>
+  </div>
+  <div class="details">
+    <label for="details_edit">Details</label>
+      <input type="text" id="details_edit" name="details_edit">
+  <input type="submit" value="Edit" class="buttons">
+
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="links">
+  <div class="links-caption">
+  <h1>Links</h1> <img src="assets/arrow-down.png" alt="" (click)="openLinks()" id="arrow-links"><img src="assets/link.png" alt="" class="icon">
+</div>
+<div *ngIf="showLinks" [@showHideSettingsAnimation]>
+  <div class="add_link" >
+    <div class="addlink-caption">
+   <h2>Add Link</h2><img src="assets/arrow-down.png" alt="" (click)="openAddLinks()" id="arrow-addlinks">
+    </div>
+<form #addLinkForm="ngForm" (ngSubmit)="addLink(addLinkForm)" *ngIf="showAddLinks" [@showHideSettingsAnimation]>
+<div class="first_row">
+  <div class="link_country">
+  <label for="link_country">Country</label>
+  <select #linkCountrySelect="ngModel" id="link_country" name="link_country" [(ngModel)]="selectedCountryAddLink" (ngModelChange)="selectCountryLinkAdd($event)">
+    <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+  </select>
+  </div>
+  <div class="link_purpose">
+    <label for="link_purpose">Purpose</label>
+    <select #linkPurposeSelect="ngModel" id="link_purpose" name="link_purpose" [(ngModel)]="selectedPurposeAddLink" (ngModelChange)="selectPurposeLinkAdd($event)">
+      <option *ngFor="let purpose of filteredPurposesAddLink" [ngValue]="purpose">{{purpose.purposeName}}</option>
+    </select>    </div>
+</div>
+<div class="second_row">
+  <div class="title">
+  <label for="title">Title</label>
+  <input #linkTitleInp="ngModel" [(ngModel)]="linkAdd.linksTitle" type="text" id="title" name="title">
+  </div>
+  <div class="url">
+    <label for="url">Url</label>
+    <input #linkURLInp="ngModel" [(ngModel)]="linkAdd.links" type="url" id="url" name="url">
+    </div>
+</div>
+<div class="link_button">
+<input type="submit" value="Add" class="buttons">
+
+</div>
+</form>
+  </div>
+  <div class="delete_link" >
+    <div class="deletelink-caption">
+<h2>Delete Link</h2><img src="assets/arrow-down.png" alt=""  id="arrow-deletelinks" (click)="openDeleteLinks()">
+    </div>
+<form #deleteLinkForm="ngForm" (ngSubmit)="deleteLink(deleteLinkForm)" *ngIf="showDeleteLinks" [@showHideSettingsAnimation]>
+
+<div class="delete_title">
+  <label for="delete_title">Title</label>
+  <select #deleteLinkTitleSelect="ngModel" id="delete_title" name="delete_title" [(ngModel)]="selectedDeleteLink" (ngModelChange)="selectLinkDelete($event)">
+    <option *ngFor="let link of links" [ngValue]="link">{{link.linksTitle}}</option>
+  </select>    <input type="submit" value="Delete" class="delete_buttons">
+
+</div>
+</form>
+  </div>
+  <div class="edit_link" >
+    <div class="editlink-caption">
+<h2>Edit Link</h2><img src="assets/arrow-down.png" alt="" (click)="openEditLinks()" id="arrow-editlinks">
+    </div>
+<form #editLinkForm="ngForm" (ngSubmit)="editLink(editLinkForm)" *ngIf="showEditLinks" [@showHideSettingsAnimation]>
+  <div class="first_row">
+    <div class="link_country">
+    <label for="linkedit_country">Country</label>
+    <select #editLinkCountrySelect="ngModel" id="linkedit_country" name="linkedit_country" [(ngModel)]="selectedCountryEditLink" (ngModelChange)="selectCountryLinkEdit($event)">
+      <option *ngFor="let country of countries" [ngValue]="country">{{country.countryName}}</option>
+    </select>    </div>
+    <div class="link_purpose">
+      <label for="linkedit_purpose">Purpose</label>
+      <select #editLinkPurposeSelect="ngModel" id="linkedit_purpose" name="linkedit_purpose" [(ngModel)]="selectedPurposeEditLink" (ngModelChange)="selectPurposeLinkEdit($event)">
+        <option *ngFor="let purpose of filteredPurposesEditLink" [ngValue]="purpose">{{purpose.purposeName}}</option>
+      </select>
+     </div>
+  </div>
+  <div class="second_row">
+    <div class="title">
+    <label for="title_edit">Title</label>
+    <select #editLinkTitleSelect="ngModel" id="title_edit" name="title_edit" [(ngModel)]="selectedEditLink" (ngModelChange)="selectLinkEdit($event)">
+      <option *ngFor="let link of filteredEditLink" [ngValue]="link">{{link.linksTitle}}</option>
+    </select>
+      </div>
+    <div class="url">
+      <label for="url_edit">Url</label>
+      <input #editUrlInp="ngModel" [(ngModel)]="linkEdit.links" type="url" id="url_edit" name="url_edit">
+      </div>
+  </div>
+  <div class="link_button">
+  <input type="submit" value="Edit" class="buttons">
+
+  </div>
+</form>
+  </div>
+</div>
+</div>
+<div class="alert_country">
+<div *ngIf="alertAddCountry;else AlertAddCountryError" class="alert_success" [@slideInOut]>
+ Country Added Successfully
+</div>
+<ng-template #AlertAddCountryError>
+  <div *ngIf="alertAddCountryError" class="alert_fail" [@slideInOut] >
+    Country Not Addedd.Try Again
+  </div>
+</ng-template>
+
+<div *ngIf="alertDeleteCountry;else AlertDeleteCountryError" class="alert_success" [@slideInOut]>
+  Country Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteCountryError>
+   <div *ngIf="alertDeleteCountryError" class="alert_fail" [@slideInOut] >
+     Country Not Deleted.Try Again
+   </div>
+ </ng-template>
+
+ <div *ngIf="alertEditCountry;else AlertEditCountryError" class="alert_success" [@slideInOut]>
+  Country Updated Successfully
+ </div>
+ <ng-template #AlertEditCountryError>
+   <div *ngIf="alertEditCountryError" class="alert_fail" [@slideInOut] >
+     Country Not Updated.Try Again
+   </div>
+ </ng-template>
+
+</div>
+<div class="alert_city">
+<div *ngIf="alertAddCity;else AlertAddCityError" class="alert_success" [@slideInOut]>
+  City Added Successfully
+ </div>
+ <ng-template #AlertAddCityError>
+   <div *ngIf="alertAddCityError" class="alert_fail" [@slideInOut] >
+     City Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDeleteCity;else AlertDeleteCityError" class="alert_success" [@slideInOut]>
+  City Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteCityError>
+   <div *ngIf="alertDeleteCityError" class="alert_fail" [@slideInOut] >
+     City Not Deleted.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertEditCity;else AlertEditCityError" class="alert_success" [@slideInOut]>
+  City Updated Successfully
+ </div>
+ <ng-template #AlertEditCityError>
+   <div *ngIf="alertEditCityError" class="alert_fail" [@slideInOut] >
+     City Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_countryGroup">
+ <div *ngIf="alertAddCountryGroup;else AlertAddCountryGroupError" class="alert_success" [@slideInOut]>
+  countryGroup Added Successfully
+ </div>
+ <ng-template #AlertAddCountryGroupError>
+   <div *ngIf="alertAddCountryGroupError" class="alert_fail" [@slideInOut] >
+    countryGroup Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDeleteCountryGroup;else AlertDeleteCountryGroupError" class="alert_success" [@slideInOut]>
+  countryGroup Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteCountryGroupError>
+   <div *ngIf="alertDeleteCountryGroupError" class="alert_fail" [@slideInOut] >
+    countryGroup Not Deleted.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertEditCountryGroup;else AlertEditCountryGroupError" class="alert_success" [@slideInOut]>
+  countryGroup Updated Successfully
+ </div>
+ <ng-template #AlertEditCountryGroupError>
+   <div *ngIf="alertEditCountryGroupError" class="alert_fail" [@slideInOut] >
+    countryGroup Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_embassy">
+ <div *ngIf="alertAddEmbassy;else AlertAddEmbassyError" class="alert_success" [@slideInOut]>
+  Embassy Added Successfully
+ </div>
+ <ng-template #AlertAddEmbassyError>
+   <div *ngIf="alertAddEmbassyError" class="alert_fail" [@slideInOut] >
+    Embassy Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDelelteEmbassy;else AlertDeleteEmbassyError" class="alert_success" [@slideInOut]>
+  Embassy Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteEmbassyError>
+   <div *ngIf="alertDeleteEmbassyError" class="alert_fail" [@slideInOut] >
+    Embassy Not Deleted.Try Again
+   </div>
+ </ng-template>
+  <div *ngIf="alertEditEmbassy;else AlertEditEmbassyError" class="alert_success" [@slideInOut]>
+  Embassy Updated Successfully
+ </div>
+ <ng-template #AlertEditEmbassyError>
+   <div *ngIf="alertEditEmbassyError" class="alert_fail" [@slideInOut] >
+    Embassy Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_purpose">
+ <div *ngIf="alertAddPurpose;else AlertAddPurposeError" class="alert_success" [@slideInOut]>
+  Purpose Added Successfully
+ </div>
+ <ng-template #AlertAddPurposeError>
+   <div *ngIf="alertAddPurposeError" class="alert_fail" [@slideInOut] >
+    Purpose Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDeletePurpose;else AlertDeletePurposeError" class="alert_success" [@slideInOut]>
+  Purpose Deleted Successfully
+ </div>
+ <ng-template #AlertDeletePurposeError>
+   <div *ngIf="alertDeletePurposeError" class="alert_fail" [@slideInOut] >
+    Purpose Not Deleted.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertEditPurpose;else AlertEditPurposeError" class="alert_success" [@slideInOut]>
+  Purpose Updated Successfully
+ </div>
+ <ng-template #AlertEditPurposeError>
+   <div *ngIf="alertEditPurposeError" class="alert_fail" [@slideInOut] >
+    Purpose Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_paper">
+ <div *ngIf="alertAddPaper;else AlertAddPaperError" class="alert_success" [@slideInOut]>
+  Paper Added Successfully
+ </div>
+ <ng-template #AlertAddPaperError>
+   <div *ngIf="alertAddPaperError" class="alert_fail" [@slideInOut] >
+    Paper Not Addedd.Try Again
+   </div>
+ </ng-template>
+
+ <div *ngIf="alertDeletePaper;else AlertDeletePaperError" class="alert_success" [@slideInOut]>
+  Paper Deleted Successfully
+ </div>
+ <ng-template #AlertDeletePaperError>
+   <div *ngIf="alertDeletePaperError" class="alert_fail" [@slideInOut] >
+    Paper Not Deleted.Try Again
+   </div>
+ </ng-template>
+
+ <div *ngIf="alertEditPaper;else AlertEditPaperError" class="alert_success" [@slideInOut]>
+  Paper Updated Successfully
+ </div>
+ <ng-template #AlertEditPaperError>
+   <div *ngIf="alertEditPaperError" class="alert_fail" [@slideInOut] >
+    Paper Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_link">
+ <div *ngIf="alertAddLink ;else AlertAddLinkError" class="alert_success" [@slideInOut]>
+  Link Added Successfully
+ </div>
+ <ng-template #AlertAddLinkError>
+   <div *ngIf="alertAddLinkError" class="alert_fail" [@slideInOut] >
+    Link Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDeleteLink ;else AlertDeleteLinkError" class="alert_success" [@slideInOut]>
+  Link Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteLinkError>
+   <div *ngIf="alertDeleteLinkError" class="alert_fail" [@slideInOut] >
+    Link Not Deleted.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertEditLink ;else AlertEditLinkError" class="alert_success" [@slideInOut]>
+  Link Updated Successfully
+ </div>
+ <ng-template #AlertEditLinkError>
+   <div *ngIf="alertEditLinkError" class="alert_fail" [@slideInOut] >
+    Link Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>
+<div class="alert_touristicPlace">
+ <div *ngIf="alertAddTouristicPlace;else AlertAddTouristicPlaceError" class="alert_success" [@slideInOut]>
+  Touristic Place Added Successfully
+ </div>
+ <ng-template #AlertAddTouristicPlaceError>
+   <div *ngIf="alertAddTouristicPlaceError" class="alert_fail" [@slideInOut] >
+    Touristic Place Not Addedd.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertDeleteTouristicPlace;else AlertDeleteTouristicPlaceError" class="alert_success" [@slideInOut]>
+  Touristic Place Deleted Successfully
+ </div>
+ <ng-template #AlertDeleteTouristicPlaceError>
+   <div *ngIf="alertDeleteTouristicPlaceError" class="alert_fail" [@slideInOut] >
+    Touristic Place Not Deleted.Try Again
+   </div>
+ </ng-template>
+ <div *ngIf="alertEditTouristicPlace;else AlertEditTouristicPlaceError" class="alert_success" [@slideInOut]>
+  Touristic Place Updated Successfully
+ </div>
+ <ng-template #AlertEditTouristicPlaceError>
+   <div *ngIf="alertEditTouristicPlaceError" class="alert_fail" [@slideInOut] >
+    Touristic Place Not Updated.Try Again
+   </div>
+ </ng-template>
+</div>

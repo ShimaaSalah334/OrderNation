@@ -1,0 +1,61 @@
+
+<div class="background-div"></div>
+<div class="body">
+  <div class="container">
+    <div class="right-container">
+      <img src="assets/logo.png" alt="" />
+      <p>O_NATION</p>
+    </div>
+    <div class="left-container">
+      <div class="with-email" id="email">
+        <a routerLink="/SignUp-Login">
+          <img
+            src="assets/previous.png"
+            alt="previous icon"
+            class="previous-icon"
+        /></a>
+        <img src="assets/lock.png" alt="lock icon" class="lock-icon" />
+        <form  #emailform="ngForm" (ngSubmit)="onSubmit(emailform)" id="emailform" >
+          <div class="enter-email">
+            <label for="emailfrogetpass"
+              >ادخل بريد الكتروني لإرسال رمز التحقق</label
+            >
+            <input
+              #emailInp="ngModel"
+              type="email"
+              id="emailfrogetpass"
+              name="email-frogetpass"
+              required
+              ngModel email="true"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              [(ngModel)]="email"
+            />
+
+            <img src="assets/email.png" alt="emailphoto" class="email-icon" />
+          </div>
+          <div class="warnning-message" role="alert" [hidden]="emailInp.valid ||emailInp.untouched" >
+            <small *ngIf="emailInp.errors?.['required']">البريد الإلكتروني مطلوب</small>
+            <small *ngIf="emailInp.errors?.['pattern']">الرجاء إدخال بريد إلكتروني صالح</small>
+          </div>
+          <!-- <div class="second-way">
+            <a  class="secondway-link" routerLink="/EnterPhone"
+              >استخدم طريقة أخري</a
+            >
+          </div> -->
+          <button [disabled]="emailform.invalid" type="submit" class="send-btn" name="send-email" >
+            إرسال
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="alert;else AlertError" class="alert_success" [@slideInOut]>
+  تم إرسال الرمز بنجاح.
+</div>
+<ng-template #AlertError>
+  <div *ngIf="alertError" class="alert_fail" [@slideInOut] >
+    تعذر التعرف علي هذا البريد الإلكتروني.
+  </div>
+</ng-template>
+

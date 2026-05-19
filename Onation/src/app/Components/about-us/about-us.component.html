@@ -1,0 +1,85 @@
+<div class="main" id="MainId">
+
+<div *ngFor="let about of aboutUs">
+  <div class="about-application">
+    <h2>عن تطبيقنا</h2>
+    <p>
+      {{about.ourApp}}
+    </p>
+  </div>
+  <div class="about-team">
+    <h2>عن فريقنا</h2>
+    <p>
+      {{about.whoAreWe}}
+    </p>
+  </div>
+</div>
+<ng-container *ngIf="loadingService.loading$ | async as isLoading">
+  <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+  </ng-container>
+  <div *ngIf="errorMessage" class="error_paragraph">
+    {{ errorMessage }}
+  </div>
+  <div class="team-members">
+    <h2>واعضاء فريقنا:</h2>
+    <div class="team-info">
+      <div class="member-section">
+        <img src="assets/alaa5.jpeg" alt="">
+        <div class="caption">
+          <p class="name">A'laa Ali Moussa</p>
+          <p class="specialism">Backend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/sheren.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Shereen Abo Elmkarem</p>
+          <p class="specialism">Backend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/dina.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Donia Abdullah </p>
+          <p class="specialism">Backend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/maram.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Maram Mohamed</p>
+          <p class="specialism">Backend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/shimaaa.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Shimaa Adel</p>
+          <p class="specialism">Frontend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/shimaa1.jpeg" alt="">
+        <div class="caption">
+          <p class="name">El-Shimaa Salah</p>
+          <p class="specialism">Frontend Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/eman.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Eman Yehia</p>
+          <p class="specialism">Flutter Developer </p>
+        </div>
+      </div>
+      <div class="member-section">
+        <img src="assets/alyaa.jpeg" alt="">
+        <div class="caption">
+          <p class="name">Alyaa Zkaria</p>
+          <p class="specialism">Flutter Developer </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

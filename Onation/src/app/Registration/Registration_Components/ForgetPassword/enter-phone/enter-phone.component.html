@@ -1,0 +1,49 @@
+<div class="background-div"></div>
+<div class="body">
+  <div class="container">
+    <div class="right-container">
+      <img src="assets/logo.png" alt="" />
+      <p>O_NATION</p>
+    </div>
+    <div class="left-container">
+      <div class="with-phone" id="phone">
+        <img
+          src="assets/previous.png"
+          alt="previous icon"
+          (click)="showemail()"
+          class="previous-icon"
+        />
+        <img src="assets/lock.png" alt="lock icon" class="lock-icon" />
+        <form #phoneform="ngForm" (ngSubmit)="showsendcode()" id="phoneform">
+          <div class="enter-phone">
+            <label for="phonefrogetpass"
+              >ادخل رقم الهاتف لإرسال رمز التحقق</label
+            >
+            <input
+            #phoneInp="ngModel"
+              type="tel"
+              id="phonefrogetpass"
+              name="phone-frogetpass"
+              pattern="[0-9]{4}-[0-9]{4}-[0-9]{3}"
+              autocomplete="off"
+              required
+              ngModel phone="true"
+            />
+            <img
+              src="assets/telephone.png"
+              alt="phone icon"
+              class="phone-icon"
+            />
+          </div>
+          <div class="warnning-message" role="alert" [hidden]="phoneInp.valid ||phoneInp.untouched" >
+            <small *ngIf="phoneInp.errors?.['required']">Phone is required</small>
+            <small *ngIf="phoneInp.errors?.['pattern']">Enter phone number in this format: 0105-1234-689</small>
+          </div>
+          <button  [disabled]="phoneform.invalid" type="submit" class="send-btn" name="send-phone" >
+            إرسال
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
