@@ -1,0 +1,208 @@
+
+.header{
+width: 80%;
+  height: 40vh;
+  background-color: white;
+  position: relative;
+  right: 19%;
+  border-radius:25px ;
+  z-index: 1;
+  -webkit-border-radius:25px ;
+  -moz-border-radius:25px ;
+  -ms-border-radius:25px ;
+  -o-border-radius:25px ;
+  direction: ltr;
+}
+.header img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius:25px ;
+  -webkit-border-radius:25px ;
+  -moz-border-radius:25px ;
+  -ms-border-radius:25px ;
+  -o-border-radius:25px ;
+  opacity: 0.6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+
+
+}
+.blur {
+  background-color: rgba(0, 0, 0, 0.08);
+  opacity: 0.2;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+   left: 0%;
+  top: 0%;
+}
+
+@media only screen and (max-width: 768px) {
+  .layout {
+    grid-template-areas:
+      'menu menu menu menu menu menu'
+      'header header header header header header'
+      'main main main main main main';
+      background-color: #76DEFF;
+
+
+  }
+
+  .menu {
+    position: static;
+    height: auto;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    left: 0;
+    right: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: none;
+   border: 0;
+
+  }
+
+  .menu .menu-bar{
+      top: -35%;
+  }
+
+  .logo p{
+      top: 50%;
+      right: 15%;
+  }
+  .logo img{
+      top: 28%;
+      left: 15%;
+  }
+  .search{
+      bottom:-5%
+  }
+  .menu .menu-hovers{
+      top: 45%;
+  }
+  .home-button{
+      display: inline-block;
+  }
+  .home-button p{
+     right: 10%;
+  }
+  .home-button img{
+      right: -5%;
+  }
+  .profile-button{
+
+      display: inline-block
+  }
+  .profile-button p{
+      right: 60%;
+  }
+
+  .profile-button img{
+      right: 47%;
+  }
+  .menu-hovers .profile-button a:hover {
+      background-color: #17c0f3;
+      margin-right: 93px;
+      width: 160px;
+
+  }
+  .menu-hovers .home-button a:hover {
+      background-color: #17c0f3;
+      margin-right: -30px;
+      width: 130px;
+  }
+  .dropdown {
+      top: -2%;
+      position: static;
+  }
+  .dropdown .setting-caption,.arrow-down{
+      display: none;
+  }
+  .dropdown .arrow-icon{
+      display: none;
+  }
+  .dropdown .setting-icon{
+      position: absolute;
+      top: 10%;
+      right: -3%;
+      border-radius: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      -ms-border-radius: 25px;
+      -o-border-radius: 25px;
+      width: 28px;
+      height: 28px;
+}
+  .dropdown .dark{
+      top: 10%;
+      right: 15%;
+  }
+  .dropdown-content {
+      display: none;
+      position: absolute;
+    right: -2%;
+    top: 15%;
+      background-color: #17c0f3;
+      min-width: 130px;
+      height: 120px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+  .header{
+      height: 20vh;
+     width: 100%;
+      right: 0;
+      left: 0;
+      z-index: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+  }
+
+  .header img {
+    height: 20vh;
+    z-index: 2;
+  }
+.main{
+  position: relative;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top:-0.8%;
+  padding-top: 10px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  z-index: 1;
+}
+.countries{
+  margin-bottom: 0;
+}
+  .main [class*='country-'] {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto 40px;
+  }
+
+
+
+
+  .darkmode-background {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+  }
+}

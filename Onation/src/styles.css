@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+direction: rtl;
+overflow-x: hidden;
+}
+.rtl-snackbar {
+  direction: rtl;
+  text-align: right;
+}
+.custom-snackbar {
+  background-color: #2196F3 !important;  /* Blue background color */
+  color: white !important;  /* White text color */
+}

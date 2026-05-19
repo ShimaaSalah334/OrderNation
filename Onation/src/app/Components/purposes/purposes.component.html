@@ -1,0 +1,43 @@
+
+<div class="main" id="PurposeMainId">
+  <p class="purpose-cpation purposeparagraph"> {{'غرض السفر' | translate}}</p>
+
+  <div class="purposes-div">
+
+<div  *ngFor="let purpose of purposeList">
+<div class="Purpose"  (mouseenter)="purpose.hovered = true" (mouseleave)="purpose.hovered = false"  (click)="showPapers(purpose.purposeId!)">
+  <img [src]="purpose.purposeImage" alt="{{purpose.purposeName}}">
+  <p *ngIf="purpose.hovered">{{purpose.purposeName ?? 'No Name'| translate}}</p>
+</div>
+
+</div>
+  </div>
+  <ng-container *ngIf="loadingService.loading$ | async as isLoading">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    </ng-container>
+    <div *ngIf="errorMessage" class="error_paragraph">
+      {{ errorMessage }}
+    </div>
+<div class="discover-more">
+<div class="discovermore-dropbtn" id="dropdown-btn" (click)="openDicoverMore()">
+   <p class="discovermore-caption" id="DiscoverMoreCaptionId"> {{'استكشف المزيد'| translate}} </p>
+   <img src="assets/arrow-up.png" alt="" id="discover-arrow">
+
+  </div>
+<div id="DiscoverDropdown" class="discover-categories" *ngIf="showDiscoverMore" [@showHideDiscoverMoreAnimation]>
+  <a class="category-1" id="category_1"  (click)="openCities()" >
+    <img src="assets/buildings.png" alt="buildings-icon" >
+    <p class="purposeparagraph"> {{'المدن الأشهر' |translate}}</p>
+  </a>
+  <a  class="category-2" id="category_2" (click)="openTouristAttractions()">
+    <img src="assets/tourists.png" alt="tourist-icon">
+    <p class="purposeparagraph">  {{'المعالم الأشهر' |translate}}</p>
+  </a>
+
+
+
+
+</div>
+</div>
+
+</div>

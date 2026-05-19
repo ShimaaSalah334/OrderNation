@@ -1,0 +1,210 @@
+<div class="background-div"></div>
+<div class="body">
+  <div class="container" id="container" [class.active]="isActive">
+    <div class="form-container sign_up">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" id="form">
+        <div class="box">
+          <label for="usersignup">اسم المستخدم</label><br /><input
+            type="text"
+            formControlName="userName"
+            id="usersignup"
+            name="username"
+          />
+          <img src="assets/people.png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="UserName?.valid || UserName?.untouched"
+          >
+            <small *ngIf="UserName?.errors?.['required']"
+              >اسم المستخدم مطلوب</small
+            >
+            <small *ngIf="UserName?.errors?.['pattern']"
+              >اسم المستخدم يجب أن يحتوي على حروف وأرقام وشرطات سفلية فقط، بدون مسافات</small
+            >
+          </div>
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+
+        </div>
+        <span id="name-error"></span>
+        <div class="box">
+          <label for="phone">رقم الهاتف</label
+          ><input
+            type="text"
+            formControlName="phoneNumber"
+            id="phone"
+            name="userphone"
+          /><img src="assets/phone-call.png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="Phone?.valid || Phone?.untouched"
+          >
+            <small *ngIf="Phone?.errors?.['required']">رقم الهاتف مطلوب</small>
+            <small *ngIf="Phone?.errors?.['pattern']"
+              >رقم الهاتف يجب أن يحتوي على أحد عشر رقمًا فقط</small
+            >
+          </div>
+        </div>
+        <div class="box">
+          <label for="email">البريد الالكترونى</label
+          ><input
+            type="email"
+            formControlName="email"
+            id="email"
+            name="useremail"
+          /><img src="assets/mail1.png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="Email?.valid || Email?.untouched"
+          >
+            <small *ngIf="Email?.errors?.['required']">البريد الإلكتروني مطلوب</small>
+            <small *ngIf="Email?.errors?.['pattern']"
+              >الرجاء إدخال بريد إلكتروني صالح</small
+            >
+          </div>
+        </div>
+
+        <div class="box">
+          <label for="pass">كلمة السر</label>
+          <input
+            type="password"
+            formControlName="password"
+            id="pass"
+            name="SignUp_Password"
+          /><img src="assets/padlock (2).png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="Password?.valid || Password?.untouched"
+          >
+            <small *ngIf="Password?.errors?.['required']"
+              >كلمة المرور مطلوبة</small
+            >
+            <small *ngIf="Password?.errors?.['pattern']"
+              >كلمة المرور يجب أن تحتوي على حرف كبير وحرف صغير ورقم وحرف خاص وأن تكون مكونة من 8 أحرف على الأقل</small
+            >
+          </div>
+        </div>
+
+        <div class="box">
+          <label for="repass">تأكيد كلمة السر</label>
+          <input
+            type="password"
+            formControlName="passwordConfirmed"
+            id="repass"
+            name="confirmpass"
+          /><img src="assets/padlock (2).png" alt="" />
+          <div
+            class="warnning-message"
+            [hidden]="ConfirmPassword?.invalid || ConfirmPassword?.untouched"
+          >
+            <small *ngIf="Password?.value !== ConfirmPassword?.value"
+              >  كلمات المرور غير متطابقة
+              </small
+            >
+          </div>
+        </div>
+
+        <button
+          [disabled]="
+            signUpForm.invalid || Password?.value !== ConfirmPassword?.value
+          "
+          class="blur submit"
+          type="submit"
+          class="sign-button"
+          name="signup"
+        >
+          تسجيل الدخول
+        </button>
+      </form>
+    </div>
+    <div class="form-container sign_in">
+      <form [formGroup]="logInForm" (ngSubmit)="onLogin()">
+        <h3>لديك حساب بالفعل!</h3>
+        <div class="box">
+          <label for="usersignin">اسم المستخدم </label>
+          <input
+            type="text"
+            formControlName="userName"
+            name="loginusername"
+            id="usersignin"
+          />
+          <img src="assets/people.png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="LoginUserName?.valid || LoginUserName?.untouched"
+          >
+            <small *ngIf="LoginUserName?.errors?.['required']"
+              >اسم المستخدم مطلوب</small
+            >
+          </div>
+        </div>
+        <div class="box">
+          <label for="passsignin">كلمة السر</label>
+          <input
+            type="password"
+            formControlName="password"
+            name="loginpassword"
+            id="passsignin"
+          /><span></span>
+          <img src="assets/padlock (2).png" alt="" />
+          <div
+            class="warnning-message"
+            role="alert"
+            [hidden]="LoginPassword?.valid || LoginPassword?.untouched"
+          >
+            <small *ngIf="LoginPassword?.errors?.['required']"
+              >كلمة المرور مطلوبة</small
+            >
+          </div>
+        </div>
+        <a routerLink="/EnterEmail" target="_self">هل نسيت كلمةالسر ؟</a>
+        <button
+          [disabled]="logInForm.invalid"
+          class="blur submit"
+          type="submit"
+          id="login"
+          name="login"
+          class="sign-button"
+        >
+          تسجيل الدخول
+        </button>
+        <p class="text">او المواصلة ب</p>
+        <button class="hidden" class="google-button">
+          حساب جوجل <img src="assets/google.png" alt="" class="google_img" />
+        </button>
+      </form>
+    </div>
+    <div class="toggle_container">
+      <div class="toggle">
+        <div class="toggle_panel toggle_left">
+          <div class="toggle-content">
+            <img src="assets/logo.png" alt="" />
+
+            <h1>مرحبا بك مرة اخرى</h1>
+            <p>قم بالدخول الى حسابك فى o_nation</p>
+            <button id="logint" class="hidden" (click)="toggleClass()">
+              تسجيل الدخول
+            </button>
+          </div>
+        </div>
+        <div class="toggle_panel toggle_right">
+          <div class="toggle-content">
+            <img src="assets/logo.png" alt="" />
+
+            <h1>مرحبا بك</h1>
+            <p>قم بالتسجيل لاستكشاف موقعنا ومميزاته</p>
+            <button id="register" class="hidden" (click)="toggleClass()">
+              تسجيل الدخول
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

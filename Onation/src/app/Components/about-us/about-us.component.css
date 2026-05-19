@@ -1,0 +1,165 @@
+.main{
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+justify-content: center;
+
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  padding-top: 50px;
+  margin-top: -10px;
+  position: relative;
+  top:0;
+  border-bottom-left-radius:25px ;
+  border-bottom-right-radius:25px ;
+  right: 19%;
+  overflow-x: hidden;
+
+}
+.main .error_paragraph{
+  color: red;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+}
+.main .about-application{
+  padding:0px 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:80%;
+  position: relative;
+  right: 10%;
+}
+.main .about-application h2{
+ margin-right: -23px;
+ color:#17a6d1 ;
+}
+.main .about-application p{
+  color:#17a6d1 ;
+  font-size: large;
+  font-weight: bold;
+  direction: rtl;
+  line-height: 30px;
+  word-spacing: 2px;
+  text-align: center;
+
+ }
+
+ .main .about-team{
+  padding:0px 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:80%;
+  position: relative;
+  right: 10%;
+}
+.main .about-team h2{
+  margin-right: -23px;
+ color:#17a6d1 ;
+}
+.main .about-team p{
+  color:#17a6d1 ;
+  font-size: large;
+  font-weight: bold;
+  direction: rtl;
+  line-height: 30px;
+  word-spacing: 2px;
+  text-align: center;
+
+ }
+.main .team-members{
+  padding:0px 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:80%;
+  position: relative;
+  right: 10%;
+}
+ .main .team-members h2{
+  margin-right: -23px;
+  color:#17a6d1 ;
+
+ }
+ .main .team-info{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 90px;
+  row-gap: 30px;
+ }
+
+ .main .team-info img{
+  width: 150px;
+  height: 150px;
+ margin-right: 12px;
+  object-fit: cover;
+  object-position: center;
+  border-radius:75px ;
+  -webkit-border-radius:75px ;
+  -moz-border-radius:75px ;
+  -ms-border-radius:75px ;
+  -o-border-radius:75px ;
+}
+ .main .team-info .caption{
+ background-color: #7addfc;
+ padding: 0px 30px;
+ text-align: center;
+ line-height: 10px;
+ box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+ border-radius: 15px;
+ -webkit-border-radius: 15px;
+ -moz-border-radius: 15px;
+ -ms-border-radius: 15px;
+ -o-border-radius: 15px;
+}
+ .main .team-info p{
+  color: white;
+  font-size: large;
+word-spacing: 2px;
+
+ }
+ .main .team-info .caption .name{
+  padding-top: 10px;
+
+ }
+ .main .team-info .caption .specialism{
+  padding-bottom: 10px;
+
+ }
+ @media only screen and (max-width: 768px) {
+
+  .main{
+    position: relative;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top:-0.8%;
+    padding-top: 10px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    z-index: 1;
+    margin-top: 5px;
+    box-shadow: none;
+
+  }
+.main .about-application {
+  right: 0;
+
+}
+.main .about-team {
+  right: 0;
+}
+.main .team-members {
+  right: 0;
+}
+  }

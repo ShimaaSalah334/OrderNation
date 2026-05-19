@@ -1,0 +1,36 @@
+<div class="main" id="MainId">
+  <div class="selection">
+    <select name="contients" id="select" [(ngModel)]="selectedContinent" (ngModelChange)="onContinentSelect()">
+      <option value="الكل" selected>{{'الكل' | translate}}</option>
+      <option *ngFor="let option of continentOptions" [value]="option">{{option}}</option>
+    </select>
+  </div>
+  <ng-container *ngIf="loadingService.loading$ | async as isLoading">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    </ng-container>
+    <div *ngIf="errorMessage" class="error_paragraph">
+      {{ errorMessage }}
+    </div>
+  <div class="countries-div">
+    <div class="countries" *ngFor="let country of filteredCountryList; let i = index">
+      <div
+        class="country"
+
+        [ngClass]="{ even: i % 2 === 0, odd: i % 2 !== 0 }"
+      >
+      <div class="favorite-icon"  >
+        <img src="assets/favorite.png" [ngClass]="{'favorite-on': !country.favoriteCountry}" [@scale]="country.favoriteCountry ? 'large' : 'small'" (click)="toggleFavorite(country)" >
+        <img src="assets/save.png" [ngClass]="{'favorite-on': country.favoriteCountry, 'favorite-off': !country.favoriteCountry}" [@scale]="country.favoriteCountry ? 'large' : 'small'" (click)="toggleFavorite(country)" >
+
+      </div>
+      <div  (mouseenter)="country.hovered = true" (mouseleave)="country.hovered = false"  (click)="openPurpose(country.countryId)">
+        <div  class="countries-image">
+        <img src="{{country.countryImages}}" alt="{{country.countryName}}" />
+      </div>
+        <p *ngIf="country.hovered">{{ country.countryName | translate}}</p>
+        <small *ngIf="country.hovered" >{{ country.countryDescription | translate}}</small>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

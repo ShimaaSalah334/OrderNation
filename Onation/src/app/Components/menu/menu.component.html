@@ -1,0 +1,196 @@
+
+<div class="menu" id="MenuID" >
+
+  <div class="menu-bar" >
+    <div class="logo_search">
+    <div class="logo">
+  <p>O-NATION</p>
+
+  <img src="assets/logo.png" alt="" id="logoimg">
+</div>
+<div class="search">
+ <input type="search" placeholder="{{'بحث' | translate}}" name="search" [(ngModel)]="countryName" (input)="search()">
+  <img src="assets/search.png" alt="" >
+</div>
+    </div>
+<div class="menu-hovers" id="menu-hovers-id">
+  <div class="first_threeHovers">
+
+  <div class="home-button" >
+  <a class="first" routerLink="/Countries" [ngClass]="{'active': Hoveredhome}"  (click)="homeHover()"><img src="assets/home.png" alt="" > <p>{{'الرئيسية' | translate}}</p></a>
+</div>
+
+<div class="profile-button" (click)="openProfile()">
+  <a  class="second" [class.active]="Hoveredprofile" (click)="profileHover()"> <img src="assets/user (1).png" alt=""> <p >{{ 'الملف الشخصي' | translate}} </p></a>
+</div>
+<div class="aboutUs-button">
+  <a routerLink="/AboutUs" class="third" [class.active]="HoveredaboutUs" (click)="aboutUsHover()"><img src="assets/about.png" alt="" > <p>{{ 'عن فريقنا' | translate}}</p></a>
+</div>
+
+<div class="favorite-button">
+  <a routerLink="/Favorites" class="fourth"  [class.active]="Hoveredfavorite" (click)="favoriteHover()"><img src="assets/love.png" alt="" > <p>{{'المفضلة' | translate}}  </p></a>
+</div>
+<div class="addMediaSugg-button" >
+  <a class="fifth" (click)="openModal()"> <p>{{'إضافة اقتراح ' | translate}}</p></a>
+</div>
+  </div>
+</div>
+<!-- <div class="dropdown-settings" >
+<a class="dropbtn" (click)="openSettings()"  ><img src="assets/settings.png" alt="setting-icon" class="setting-icon"  > <p class="setting-caption">{{'الاعدادات'| translate}}</p><img src="assets/down.png" alt="" class="arrow-icon" id="arrow"></a>
+<div id="myDropdown-settings" class="settings-content" *ngIf="ShowSettings" [@showHideSettingsAnimation]>
+  <div class="lang">
+  <a  > <img src="assets/translate.png" alt="" class="translate-icon">
+    <p class="changelang" (click)="openLang()">{{ 'تغيير اللغة' | translate }}</p>
+    <select [class.custom-style]="isCustomStyleEnabled" (change)="changeLang($event)" name="" id="">
+      <option [selected]="lang==='en'" value="en">EN</option>
+      <option [selected]="lang==='ar'" value="ar">AR</option>
+    </select>
+
+  </a>
+  </div>
+ <div>
+  <a > <input type="checkbox" id="darkmode-toggle" >
+    <label for="darkmode-toggle">
+      <img src="assets/sun.png"  alt="" class="mood sun" id="sun">
+      <img src="assets/night-mode.png"  alt="" class="mood moon" id="moon">
+    </label>
+  </a>
+ </div>
+
+</div>
+</div> -->
+
+<div class="dropdown-addsugg" >
+  <a class="dropbtn-addsugg" (click)="openAddSuggestion()" > <p class="addsugg-caption">{{'إضافة اقتراح' | translate}} </p><img src="assets/down.png" alt="" class="arrowsugg-icon" id="arrow-sugg"></a>
+  <div id="myDropdown-sugg" class="addsugg-content" [@showHideMenuAnimation]="ShowAddSugg? 'show-addsuggestion':'hide-addsuggestion' " >
+<form  #suggform="ngForm" (ngSubmit)="addsuggestion(suggform)">
+  <input #suggTitleInp="ngModel" class="address" type="text" name="sugg_address" placeholder="{{'عنوان الاقتراح'| translate}}" [(ngModel)]="newSugg.suggestionTitle">
+  <div class="description-div">
+  <input #suggDescriptionInp="ngModel" type="text" name="sugg_description" placeholder="{{'وصف الاقتراح'| translate}}" [(ngModel)]="newSugg.suggestionDescription" required>
+  <div class="warnning-message" [hidden]="suggDescriptionInp.valid || suggDescriptionInp.untouched">
+    <small *ngIf="suggDescriptionInp.errors?.['required']">وصف الإقتراح مطلوب </small>
+  </div>
+  </div>
+ <button type="submit" class="addsugg-button" [disabled]="suggform.invalid">
+  {{'إضافة' | translate}}
+ </button>
+</form>
+
+
+  </div>
+  </div>
+  </div>
+  <div class="profile" id="profile" [@showHideMenuAnimation]="ShowProfile? 'show-menu':'hide-menu' "  >
+    <div class="top-div">
+      <p class="close-icon" (click)="closeProfile()">&times;</p>
+      <p class="edit-word" (click)="openEditProfile()"> {{'تعديل الملف'| translate}} </p>
+      <img
+        src="assets/edit.png"
+        alt="edit icon"
+        class="edit-icon"
+        (click)="openEditProfile()"
+      />
+      <img src="assets/user.png" alt="user image" class="user-image" />
+      <p class="name" *ngIf="currUser">{{'مرحبا,' | translate}} {{currUser.userName}}!</p>
+    </div>
+    <div class="bottom-div" id="BottomDiv">
+      <div class="user-name">
+        <img src="assets/user-outline.png" alt="user-icon" id="user-white" />
+        <p class="user-label paragraph">{{'اسم المستخدم' | translate}}</p>
+      </div>
+      <p class="user-data paragraph" *ngIf="currUser">{{currUser.userName}}</p>
+      <div class="user-email">
+        <img src="assets/mail.png" alt="mail icon" id="mail-white"  />
+
+        <p class="paragraph"> {{ 'البريد الالكتروني' | translate}}</p>
+      </div>
+      <p class="user-data paragraph"  *ngIf="currUser">{{currUser.email}}</p>
+      <div class="user-phone">
+        <img src="assets/telephone.png" alt="phone-icon" id="phone-white" />
+        <p class="paragraph"> {{'رقم الهاتف' | translate}}</p>
+      </div>
+      <p class="user-data " id="Phone" *ngIf="currUser">{{currUser.phoneNumber}}</p>
+      <div class="buttons">
+        <div>
+          <button type="button" class="log-out " id="LogOutParagraph" (click)="logOut()"> {{'تسجيل الخروج'| translate}}</button>
+        </div>
+        <div>
+          <button type="button" class="delete-account" (click)="openDialog()"> {{'حذف الحساب' | translate}}</button>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="error_paragraph">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+
+  </div>
+    <div class="edit-profile" id="edit-profile" [@showHideMenuAnimation]="ShowEditProfile?'show-menu':'hide-menu' ">
+        <div class="top-div">
+          <img
+            src="assets/back- icon.png"
+            alt="back icon"
+            class="back-icon"
+            (click)="closeEditProfile()"
+          />
+          <img src="assets/user.png" alt="" class="user-image" />
+          <p *ngIf="currUser"> {{'مرحبا, ' | translate}} {{currUser.userName}}!</p>
+        </div>
+        <div class="bottom-div" id="BottomDivedit">
+          <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()">
+          <div class="user-name">
+            <label for="user_name" > {{'اسم المستخدم' | translate}}</label>
+            <input type="text" id="user_name" formControlName="userName" required *ngIf="currUser" />
+          </div>
+          <div class="user-email">
+            <label for="user_email" > {{ 'البريد الالكتروني' | translate}}</label>
+            <input type="email" formControlName="email"  *ngIf="currUser" id="user_email" class="inputs" />
+          </div>
+          <div class="user-phone">
+            <label for="user_phone"> {{'رقم الهاتف' | translate}}</label>
+            <input type="tel" formControlName="phoneNumber" *ngIf="currUser"class="inputs" id="user_phone" />
+          </div>
+          <div class="buttons">
+            <button type="submit" class="change" id="ChangeParagraph">{{'حفظ التغييرات' | translate}}</button>
+          </div>
+          </form>
+          <div *ngIf="errorMessage" class="error_paragraph">
+            {{ errorMessage }}
+          </div>
+        </div>
+
+      </div>
+      <app-alert></app-alert>
+
+</div>
+
+<div *ngIf="alertDeleteAccountError" class="alert_fail" [@slideInOut]>
+  عذرا فشل حذف الحساب
+</div>
+<div *ngIf="alertSaveChanges;else AlertSaveChangesError" class="alert_success" [@slideInOut]>
+  تم حفظ التغييرات بنجاح.
+</div>
+<ng-template #AlertSaveChangesError>
+  <div *ngIf="alertSaveChangesError" class="alert_fail" [@slideInOut] >
+    تعذر حفظ التغييرات .
+  </div>
+</ng-template>
+<div class="suggestion-container">
+
+  <!-- Modal -->
+  <div id="addSuggestionModal" class="modal" [ngClass]="{'show': ShowMediaAddSugg}">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form #suggform="ngForm" (ngSubmit)="addsuggestion(suggform)">
+        <input #suggTitleInp="ngModel" class="address" type="text" name="sugg_address" placeholder="{{ 'عنوان الاقتراح' | translate }}" [(ngModel)]="newSugg.suggestionTitle">
+        <div class="description-div">
+          <input #suggDescriptionInp="ngModel" type="text" name="sugg_description" placeholder="{{ 'وصف الاقتراح' | translate }}" [(ngModel)]="newSugg.suggestionDescription" required>
+          <div class="warnningMedia-message" [hidden]="suggDescriptionInp.valid || suggDescriptionInp.untouched">
+            <small *ngIf="suggDescriptionInp.errors?.['required']">وصف الإقتراح مطلوب </small>
+          </div>
+        </div>
+        <button type="submit" class="addMediasugg-button" [disabled]="suggform.invalid">{{ 'إضافة' | translate }}</button>
+      </form>
+    </div>
+  </div>
+</div>

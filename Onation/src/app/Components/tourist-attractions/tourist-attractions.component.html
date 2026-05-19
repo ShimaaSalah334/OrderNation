@@ -1,0 +1,21 @@
+<div class="main" id="LandMarkMainId" >
+  <div class="popular-landmarks">
+    <img src="assets/tourists.png" alt="" >
+    <p class="popular-caption" id="PopularCaptionId">{{'المعالم الأشهر'| translate}}</p>
+   </div>
+   <ng-container *ngIf="loadingService.loading$ | async as isLoading">
+    <app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+    </ng-container>
+    <div *ngIf="errorMessage" class="error_paragraph">
+      {{ errorMessage }}
+    </div>
+   <div class="landmarks-div">
+ <div class="landmarks" *ngFor="let att of filteredtouristAttList">
+    <div class="landmark"  (mouseenter)="att.hovered = true" (mouseleave)="att.hovered = false" >
+      <img src="{{att.placeImage}}" alt="{{att.placeName}}" />
+      <p *ngIf="att.hovered"> {{att.placeName}}</p>
+    </div>
+  </div>
+
+
+</div>
